@@ -69,5 +69,15 @@ func (jp *JwtParser) Parse(ctx context.Context, jwtInput string) (model.JWTData,
 
 	jwtData.ID = subID
 
+	email, ok := jwtToken.Get("name")
+	if ok {
+		jwtData.Email = email.(string)
+	}
+
+	pic, ok := jwtToken.Get("url")
+	if ok {
+		jwtData.ProfileImage = pic.(string)
+	}
+
 	return jwtData, nil
 }
